@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sunwai — Public Grievance Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="mark">सु</span>
+      <div>
+        <span class="brand-name">Sunwai</span>
+        <span class="brand-sub">Public Grievance Portal</span>
+      </div>
+    </div>
+
+    <nav class="side-links" id="sideNav">
+      <a href="#file" class="current">File a Grievance</a>
+      <a href="#track">Track Status</a>
+      <a href="#ledger">Public Ledger</a>
+      <a href="#how">How it Works</a>
+    </nav>
+
+    <div class="side-stats">
+      <div class="side-stat"><div class="num" id="statTotal">0</div><div class="lbl">Grievances filed</div></div>
+      <div class="side-stat"><div class="num" id="statResolved">0</div><div class="lbl">Resolved</div></div>
+      <div class="side-stat"><div class="num">6.4</div><div class="lbl">Avg. days to resolve</div></div>
+      <div class="side-foot">Jaipur Municipal Services<br/>Form 7-B · Mon–Sat, 10:00–17:00</div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <section class="hero" id="file" style="border-top:none;">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow-line"><span>Jaipur Municipal Services</span><span class="rule"></span></div>
+          <h1>Every complaint gets a number, a record, and a hearing.</h1>
+          <p class="lede">File a civic issue in your ward — roads, water, electricity, sanitation — and follow it from filing to resolution with a public ticket number.</p>
+        </div>
+
+        <div class="file-card">
+          <div class="file-card-head">
+            <div>
+              <h2>File a grievance</h2>
+              <div class="hint">Takes about two minutes</div>
+            </div>
+            <span class="file-id-tag">FORM&nbsp;7-B</span>
+          </div>
+
+          <form id="fileForm">
+            <div class="field">
+              <label for="category">Category</label>
+              <select id="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option>Roads &amp; Potholes</option>
+                <option>Water Supply</option>
+                <option>Street Lighting</option>
+                <option>Sanitation &amp; Waste</option>
+                <option>Electricity</option>
+                <option>Drainage &amp; Sewage</option>
+                <option>Stray Animals</option>
+                <option>Parks &amp; Public Spaces</option>
+                <option>Public Safety</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="title">Short title</label>
+              <input id="title" type="text" placeholder="e.g. Broken streetlight near bus stop" required maxlength="80" />
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="locality">Locality / ward</label>
+                <input id="locality" type="text" list="localities" placeholder="e.g. Vaishali Nagar" required />
+                <datalist id="localities">
+                  <option value="Mansarovar"></option>
+                  <option value="Vaishali Nagar"></option>
+                  <option value="C-Scheme"></option>
+                  <option value="Malviya Nagar"></option>
+                  <option value="Jagatpura"></option>
+                  <option value="Sanganer"></option>
+                  <option value="Civil Lines"></option>
+                  <option value="Raja Park"></option>
+                </datalist>
+              </div>
+              <div class="field">
+                <label for="landmark">Nearest landmark</label>
+                <input id="landmark" type="text" placeholder="e.g. Near Gate No. 2" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="desc">Description</label>
+              <textarea id="desc" placeholder="What's wrong, and since when?" required></textarea>
+            </div>
+
+            <div class="field">
+              <label>Priority</label>
+              <div class="priority-group">
+                <label class="priority-opt"><input type="radio" name="priority" value="Low" />Low</label>
+                <label class="priority-opt"><input type="radio" name="priority" value="Medium" checked />Medium</label>
+                <label class="priority-opt"><input type="radio" name="priority" value="Urgent" />Urgent</label>
+              </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit grievance</button>
+            <div class="form-foot">This is a front-end demo — nothing leaves your browser. Submissions are stored only in this page's memory.</div>
+          </form>
+
+          <div class="confirm" id="confirmPanel">
+            <div class="stamp">RECEIVED</div>
+            <h3>Your grievance is on record.</h3>
+            <div class="ticket" id="confirmTicket">SNW-2026-00000</div>
+            <p id="confirmCopy">Save this number to track progress. We've logged it in the public ledger below under your locality.</p>
+            <button id="confirmReset">File another</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="track">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Track a grievance</h2>
+            <div class="sub">Enter a ticket number to see where it stands — acknowledged, in progress, or resolved.</div>
+          </div>
+        </div>
+        <div class="track-box">
+          <input id="trackInput" type="text" placeholder="e.g. SNW-2026-04821" />
+          <button id="trackBtn">Track</button>
+        </div>
+        <div class="track-hint">Try a sample ticket: <code>SNW-2026-04821</code>, <code>SNW-2026-04790</code>, or <code>SNW-2026-04655</code> — or track one you just filed above.</div>
+
+        <div class="track-result" id="trackResult"></div>
+      </div>
+    </section>
+
+    <section id="ledger">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Public ledger</h2>
+            <div class="sub">Every grievance filed through this portal, visible to anyone in the ward. Support an issue to signal it matters to you too.</div>
+          </div>
+        </div>
+
+        <div class="filter-row" id="statusFilters"></div>
+        <div class="filter-row" id="categoryFilters"></div>
+        <div class="search-row">
+          <input id="searchInput" type="text" placeholder="Search by title or locality…" />
+        </div>
+
+        <div class="ledger" id="ledgerHeadRow" style="display:none">
+          <div class="ledger-row" style="font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--ink);">
+            <div>Ticket</div><div>Issue</div><div>Locality</div><div>Status</div><div>Assigned officer</div><div>Support</div>
+          </div>
+        </div>
+        <div class="ledger" id="ledgerBody"></div>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>How it works</h2>
+            <div class="sub">From complaint to closure, in four recorded steps.</div>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="n">01</div><h3>File</h3><p>Describe the issue and its location. You get a ticket number immediately.</p></div>
+          <div class="step"><div class="n">02</div><h3>Acknowledge</h3><p>The relevant ward office confirms receipt, usually within 48 hours.</p></div>
+          <div class="step"><div class="n">03</div><h3>Act</h3><p>The issue is assigned and worked on. Status updates post to your ticket.</p></div>
+          <div class="step"><div class="n">04</div><h3>Resolve</h3><p>Once fixed, the ticket closes with a note — and stays visible on record.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap foot-row">
+        <span>Sunwai — a public grievance portal for Jaipur wards. Front-end demonstration only.</span>
+        <span>Form 7-B · Office hours 10:00–17:00, Mon–Sat</span>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<div class="officer-modal" id="officerModal" aria-hidden="true">
+  <div class="officer-modal-card" role="dialog" aria-modal="true" aria-label="Officer details">
+    <button class="officer-modal-close" data-close-modal aria-label="Close">✕</button>
+    <div id="officerModalBody"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

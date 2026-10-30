@@ -1,0 +1,9 @@
+{
+  "name": "sunwai-grievance-portal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sunwai — Public Grievance Portal frontend (static demo)",
+  "scripts": {
+    "dev": "npx serve ."
+  }
+}
